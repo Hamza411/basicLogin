@@ -113,6 +113,15 @@ button:disabled {
   float: right;
   padding-right: 16px;
 }
+
+.wrapper {
+  text-align: center;
+}
+
+.button {
+  position: absolute;
+  top: 50%;
+}
 /* .topnav-left {
   float: left;
   color: #f2f2f2;

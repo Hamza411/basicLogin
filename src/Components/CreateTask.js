@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { createTask, listTasks } from '../public/endpoints';
+import { createTask } from '../public/endpoints';
 import jwt_decode from "jwt-decode";
 
 function CreateTask(props) {
@@ -26,39 +26,41 @@ function CreateTask(props) {
             headers: headers
         }).then(response => {
             console.log(response)
+            props.history.goBack()
 
         }).catch(err => {
             console.log("error is", err)
         });
     }
 
-    useEffect(() => {
-        getTasks()
+    // useEffect(() => {
+    //     getTasks()
 
-    }, [])
+    // }, [])
 
 
-    const getTasks = async () => {
-        const userId = jwt_decode(localStorage.getItem("token"))._id;
-        const token = localStorage.getItem("token")
-        var data = {}
-        data.id = userId
-        const headers = {
-            "Content-Type": "application/json",
-            Authorization: token
-        }
-        console.log("user", userId)
-        const url = `${listTasks}/${data.id}`
-        console.log("url", url)
-        await axios.get(url, {
-            headers: headers
-        }).then(response => {
-            console.log("get all task", response)
+    // const getTasks = async () => {
+    //     const userId = jwt_decode(localStorage.getItem("token"))._id;
+    //     const token = localStorage.getItem("token")
+    //     var data = {}
+    //     data.id = userId
+    //     const headers = {
+    //         "Content-Type": "application/json",
+    //         Authorization: token
+    //     }
+    //     console.log("user", userId)
+    //     const url = `${listTasks}/${data.id}`
+    //     console.log("url", url)
 
-        }).catch(err => {
-            console.log("error is", err)
-        });
-    }
+    //     await axios.get(url, {
+    //         headers: headers
+    //     }).then(response => {
+    //         console.log("get all task", response)
+
+    //     }).catch(err => {
+    //         console.log("error is", err)
+    //     });
+    // }
     return (
         <div className="form-container" >
             <div className="register-form">
@@ -73,6 +75,7 @@ function CreateTask(props) {
                     onChange={(e) => setTask(e.target.value)}
                 />
                 <button className="form-field" onClick={() => submitForm()}>Add Data</button>
+                <button className="form-field" onClick={() => props.history.goBack()}>Go Back</button>
             </div>
         </ div>
     );

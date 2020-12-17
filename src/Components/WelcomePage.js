@@ -1,4 +1,5 @@
 import React from 'react';
+import Table from './Table';
 
 function WelcomePage(props) {
 
@@ -9,11 +10,10 @@ function WelcomePage(props) {
 
     return (
         <div>
-            < div className="form-container" >
-                <div className="register-form">
-                    <button className="form-field" onClick={() => addTask()}>Add Task</button>
-                </div>
-            </div >
+            <Table />
+            <div className="wrapper">
+                <button type="button" className="btn btn-dark" onClick={() => addTask()}>Add Task</button>
+            </div>
         </div>
     );
 }
