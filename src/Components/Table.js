@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { listTasks } from '../public/endpoints';
+import { createTask, listTasks } from '../public/endpoints';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
 
-function Table() {
+function Table(props) {
 
     const [task, setTask] = useState([]);
 
@@ -24,7 +24,6 @@ function Table() {
         }
         // console.log("user", user_id)
         const url = `${listTasks}/${user_id}`
-        console.log("url", url)
 
         await axios.get(url, {
             headers: headers
@@ -37,12 +36,35 @@ function Table() {
         });
     }
 
+    const Edit = () => {
+        const user_id = jwt_decode(localStorage.getItem("token"))._id;
+        const data = {
+            user_id,
+            name: task
+        }
+        console.log("data", data)
+        const token = localStorage.getItem("token")
+        console.log(token);
+        const headers = {
+            "Content-Type": "application/json",
+            Authorization: token
+        }
+        axios.post(createTask, data, {
+            headers: headers
+        }).then(response => {
+            // console.log(response)
+            props.history.push('/createTask')
+
+        }).catch(err => {
+            console.log("error is", err)
+        });
+    }
 
     return (
         <div className="container-fluid">
-            <h1>List of Tasks</h1>
+            <h1 style={{ textAlign: "center" }}>List of Tasks</h1>
 
-            <table class="table table-striped table-dark">
+            <table className="table table-striped table-dark">
                 <thead>
                     <tr>
                         <th>List Of Task</th>
@@ -50,11 +72,12 @@ function Table() {
                 </thead>
                 <tbody>
                     {
-                        task.map(t => {
+                        task.map((t, index) => {
                             return (
-                                <tr key={t.user_id} >
-                                    <th>Task Name</th>
+                                <tr key={index} >
+                                    <th>{index}</th>
                                     <td>{t.name}</td>
+                                    <td><button type="button" className="btn btn-success" onClick={() => Edit()}>Edit</button></td>
                                 </tr>
                             )
                         })
