@@ -1,23 +1,40 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import FormikForm from './Components/FormikForm';
+import WelcomePage from './Components/WelcomePage';
+import Registration from './Components/Registration';
+import ProtectedRoute from './Components/ProtectedRoute';
+import Header from './Components/Header';
+import CreateTask from './Components/CreateTask';
 
-function App() {
+
+import AppContainer from './Components/appContainer'
+
+
+function App(props) {
+
+  // console.log("apps called")
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+    <div>
+      <BrowserRouter>
+        <Switch>
+          {/* <Route exact path="/" component={FormikForm} /> */}
+          <ProtectedRoute exact path="/" component={FormikForm} />
+          <ProtectedRoute exact path="/formik" component={FormikForm} />
+
+          <AppContainer exact path="/login">
+            <FormikForm />
+          </AppContainer>
+
+          <ProtectedRoute exact path="/createTask" component={CreateTask} />
+
+          <ProtectedRoute exact path="/registration" component={Registration} />
+          <ProtectedRoute exact path="/welcome" component={WelcomePage} />
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
