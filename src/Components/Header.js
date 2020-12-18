@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css'
+
 const Header = (props) => {
 
     const [user, setUser] = useState("")
@@ -9,11 +12,36 @@ const Header = (props) => {
         setUser(localStorage.getItem('token'))
     })
 
-
-    if (isLoggedOut) {
-        setLoggedOut(false)
-        window.location.reload()
+    const onLogout = () => {
+        confirmAlert({
+            title: 'Logout ?',
+            message: 'Are you sure to Logout.',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => yes()
+                },
+                {
+                    label: 'No',
+                    onClick: () => no()
+                }
+            ]
+        });
     }
+    const yes = () => {
+        if (isLoggedOut) {
+
+            localStorage.clear();
+            setLoggedOut(false)
+            window.location.reload()
+        }
+    }
+
+    const no = () => {
+        return
+    }
+
+
 
     const Navigation = () => {
         if (user) {
@@ -24,7 +52,7 @@ const Header = (props) => {
                     </div>
                     <div className="topnav-right">
                         <button type="button" className="btn btn-success" onClick={() => {
-                            localStorage.clear();
+                            onLogout();
                             // setUser("")
                             setLoggedOut(true)
                         }}>Logout</button>

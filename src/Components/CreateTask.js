@@ -17,7 +17,7 @@ function CreateTask(props) {
         }
         console.log("data", data)
         const token = localStorage.getItem("token")
-        console.log(token);
+        // console.log(token);
         const headers = {
             "Content-Type": "application/json",
             Authorization: token
@@ -33,34 +33,6 @@ function CreateTask(props) {
         });
     }
 
-    // useEffect(() => {
-    //     getTasks()
-
-    // }, [])
-
-
-    // const getTasks = async () => {
-    //     const userId = jwt_decode(localStorage.getItem("token"))._id;
-    //     const token = localStorage.getItem("token")
-    //     var data = {}
-    //     data.id = userId
-    //     const headers = {
-    //         "Content-Type": "application/json",
-    //         Authorization: token
-    //     }
-    //     console.log("user", userId)
-    //     const url = `${listTasks}/${data.id}`
-    //     console.log("url", url)
-
-    //     await axios.get(url, {
-    //         headers: headers
-    //     }).then(response => {
-    //         console.log("get all task", response)
-
-    //     }).catch(err => {
-    //         console.log("error is", err)
-    //     });
-    // }
     return (
         <div className="form-container" >
             <div className="register-form">

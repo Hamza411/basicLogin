@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import FormikForm from './Components/FormikForm';
 import WelcomePage from './Components/WelcomePage';
 import Registration from './Components/Registration';
 import ProtectedRoute from './Components/ProtectedRoute';
-import Header from './Components/Header';
+// import Header from './Components/Header';
 import CreateTask from './Components/CreateTask';
-
-
 import AppContainer from './Components/appContainer'
+import Table from './Components/Table';
 
 
 function App(props) {
@@ -30,7 +29,7 @@ function App(props) {
           </AppContainer>
 
           <ProtectedRoute exact path="/createTask" component={CreateTask} />
-
+          <Route exact path="/table" component={Table} />
           <ProtectedRoute exact path="/registration" component={Registration} />
           <ProtectedRoute exact path="/welcome" component={WelcomePage} />
         </Switch>

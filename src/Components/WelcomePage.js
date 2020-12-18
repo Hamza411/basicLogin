@@ -3,7 +3,7 @@ import Table from './Table';
 
 function WelcomePage(props) {
 
-    const addTask = (task) => {
+    const addTask = () => {
 
         props.history.push("/createTask")
     }

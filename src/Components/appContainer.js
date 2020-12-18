@@ -2,16 +2,15 @@ import React from 'react';
 import Header from './Header';
 
 
-function AppContainer( props)
-{
+function AppContainer(props) {
   // console.log("in app contiae")
   // console.log(props)
   return (
-  <>
-  <Header />
-  {/* <Component {...props}/> */}
-  {props.children}
-</>
+    <>
+      <Header />
+      {/* <Component {...props}/> */}
+      {props.children}
+    </>
   )
 }
 

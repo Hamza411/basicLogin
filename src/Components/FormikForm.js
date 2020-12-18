@@ -1,4 +1,4 @@
-import React , {useState}from 'react';
+import React, { useState } from 'react';
 import { Formik } from "formik";
 import * as Yup from "yup";
 import axios from 'axios';
@@ -11,7 +11,7 @@ import jwt_decode from "jwt-decode";
 
 
 
-const intialValues = { email: "ijazmudassir786@gmail.com", password: "123456" };
+const intialValues = { email: "hamzasaleam@gmail.com", password: "123456" };
 
 const LoginSchema = Yup.object().shape({
 
@@ -27,7 +27,7 @@ const FormikForm = (props) => {
 
     const [isLoggedIn, setLoggedIn] = useState(false)
     const [email, setEmail] = useState("")
-    
+
     const submitForm = (values) => {
         console.log(values);
         setEmail(values.email)
@@ -41,7 +41,7 @@ const FormikForm = (props) => {
             if (data.data.jwt) {
                 var decoded = jwt_decode(data.data.jwt);
                 Cookie.set("token", decoded);
-                Cookie.set("email",  values.email);
+                Cookie.set("email", values.email);
 
                 localStorage.setItem("token", data.data.jwt);
                 localStorage.setItem("email", values.email);
@@ -123,8 +123,9 @@ const FormikForm = (props) => {
                             <button className="form-field" type="submit" >
                                 Login
                             </button>
-                            
-                            <a href="#" onClick={()=> props.history.push('/registration')}  className="new">Need Account? Click here to Register !</a>
+
+                            {/* <a href="#" onClick={()=> props.history.push('/registration')}  className="new">Need Account? Click here to Register !</a> */}
+                            <a href="/registration" className="new">Need Account? Click here to Register !</a>
                         </form>
                         <ToastContainer />
                     </div>
